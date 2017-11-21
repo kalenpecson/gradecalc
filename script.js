@@ -22,6 +22,9 @@ function calculateCurrentGrade(){
     getquizzes();
     gettests();
     midterm= document.getElementById("midtermgrades").value;
+    for(var i=0;i<midterm.length; i++){
+        midterm[i] = parseInt(midterm[i])
+    }
     var currentgradesarray=[averagehomework, averagequiz, averagetest, midterm];
     testweight= document.getElementById("testsweight").value;
     quizweight= document.getElementById("quizzesweight").value;
