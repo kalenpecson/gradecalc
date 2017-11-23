@@ -7,38 +7,48 @@
     <link rel="stylesheet" href="style.css"/>
 </head>
 <body>
-<button id="StartGame" onclick="calculateCurrentGrade ()"></button>
-<table border=”1” cellspacing=”2” cellpadding=”5”>
-    <tr>
-        <td>Field</td>
-        <td>Grades(%)</td>
-        <td>Weight(5)</td>
-    </tr>
-    <tr>
-        <td>Homework</td>
-        <td><input type="text" id="homeworkgrades" value="80,70,25" size="25"></td>
-        <td><input type="text" id="homeworkweight" value="20" size="25"></td>
-    </tr>
-    <tr>
-        <td>Quizzes</td>
-        <td><input type="text" id="quizzesgrades" value="87,89,76" size="25"></td>
-        <td><input type="text" id="quizzesweight" value="20" size="25"></td></td>
-    </tr>
-    <tr>
-        <td>Tests</td>
-        <td><input type="text" id="testgrades" value="25,89,90" size="25"></td>
-        <td><input type="text" id="testsweight" value="20" size="25"></td></td>
-    </tr>
-    <tr>
-        <td>Midterm</td>
-        <td><input type="text" id="midtermgrades" value="95" size="25"></td>
-        <td><input type="text" id="midtermweight" value="40" size="25"></td></td>
-    </tr>
-</table>
-<div>Desired Grade:
-
-    <input type="text" id="desiredgrade" value="" size="25">
+<div id="text">Find Out What Grade You Need On Your Final!</div>
+<div id="table">Enter Your Grades And Their Respective Weights
+    <table  id="truetable" border=”1” cellspacing=”2” cellpadding=”5”>
+        <tr id="fieldrow">
+            <td>Field</td>
+            <td>Grades(%)</td>
+            <td>Weight(%)</td>
+        </tr>
+        <tr id="homeworkrow">
+            <td>Homework</td>
+            <td><input type="text" id="homeworkgrades" value="80,70,83" size="25"></td>
+            <td><input type="text" id="homeworksweight" value="20" size="25"></td>
+        </tr>
+        <tr id="quizzesrow">
+            <td>Quizzes</td>
+            <td><input type="text" id="quizzesgrades" value="87,89,76" size="25"></td>
+            <td><input type="text" id="quizzesweight" value="20" size="25"></td></td>
+        </tr>
+        <tr id="testsrow">
+            <td>Tests</td>
+            <td><input type="text" id="testgrades" value="78,89,90" size="25"></td>
+            <td><input type="text" id="testsweight" value="20" size="25"></td></td>
+        </tr>
+        <tr id="midtermrow">
+            <td>Midterm</td>
+            <td><input type="text" id="midtermgrades" value="95" size="25"></td>
+            <td><input type="text" id="midtermsweight" value="40" size="25"></td></td>
+        </tr>
+    </table>
 </div>
+
+<div id="desiredstuff">Desired Grade(%):
+    <input type="text" id="desiredgrade" value="90" size="25">
+    Final Test Weight(%):
+    <input type="text" id="finalweight" value="30" size="25">
+
+</div>
+<div id="button">
+    <button id="Calculatescore" onclick="calculateGradeNeeded()">Calculate</button>
+
+</div>
+<div id="neededgrade"></div>
 
 </body>
 </html>

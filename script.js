@@ -1,12 +1,3 @@
-// calculateCurrentGrade() → takes data from page, calls on sub-functions to calculate the student grade and output it back to page.
-//     Also “return” the result so that calculateGradeNeeded() can use it.
-// convertArrayStringToNumber() → takes an array of strings (from page) and returns the same array, except all the items are numbers.
-//     Use string.split(“,”)  to convert a string into an array of strings, then iterate through and convert each item in the array into a
-// number like:
-//     array[i] = parseInt(array[i])
-// averageArray() → takes an array of numbers and returns the average of those numbers
-// calculateGradeNeeded() → takes the current grade returned by calculateCurrentGrade() and the grade desired and does the math to determine
-// what the user needs on the final.
 
 var averagehomework=0;
 var averagequiz=0;
@@ -16,27 +7,64 @@ var homeworkweight=0;
 var testweight=0;
 var quizweight=0;
 var midtermweight=0;
+var currentgrade=0;
+var wantedgrade=0;
+var finalweight=0;
+var necessarygrade=0;
+
+function calculateGradeNeeded(){
+    calculateCurrentGrade();
+    wantedgrade= document.getElementById("desiredgrade").value;
+    var wantedgradearray=[];
+    wantedgradearray.push(wantedgrade);
+    for(var i=0;i<(wantedgradearray.length); i++){
+        wantedgradearray[i] = parseInt(wantedgradearray[i]);
+        wantedgrade= wantedgradearray[i];
+    }
+    finalweight = document.getElementById("finalweight").value;
+    var finalweightarray=[];
+    finalweightarray.push(finalweight);
+    for(var i=0;i<(finalweightarray.length); i++){
+        finalweightarray[i] = parseInt(finalweightarray[i]);
+        finalweight= finalweightarray[i];
+    }
+    necessarygrade= (((wantedgrade*100)-(currentgrade*(100-finalweight)))/finalweight);
+    document.getElementById("neededgrade").innerHTML= necessarygrade+"%";
+    message(necessarygrade);
+
+}
+
 
 function calculateCurrentGrade(){
     gethomework();
     getquizzes();
     gettests();
     midterm= document.getElementById("midtermgrades").value;
-    for(var i=0;i<midterm.length; i++){
-        midterm[i] = parseInt(midterm[i])
+    var midtermarray=[];
+    midtermarray.push(midterm);
+    for(var i=0;i<(midtermarray.length); i++){
+        midtermarray[i] = parseInt(midtermarray[i]);
+        midterm=midtermarray[i];
     }
+    colorbox(midterm,midtermrow,midtermgrades,midtermsweight);
+    checkvalues(midtermarray);
     var currentgradesarray=[averagehomework, averagequiz, averagetest, midterm];
     testweight= document.getElementById("testsweight").value;
     quizweight= document.getElementById("quizzesweight").value;
-    midtermweight= document.getElementById("midtermweight").value;
-    homeworkweight= document.getElementById("homeworkweight").value;
+    midtermweight= document.getElementById("midtermsweight").value;
+    homeworkweight= document.getElementById("homeworksweight").value;
     var currentweightsarray=[homeworkweight, quizweight, testweight, midtermweight];
-    var currentgrade=0;
-    for(var i=0;i< currentgradesarray;i++ ){
-        currentgrade= ((currentgradesarray[i])*(currentweightsarray[i]))
+    for(var i=0;i<currentweightsarray.length; i++){
+        currentweightsarray[i] = parseInt(currentweightsarray[i])
+    }
+    console.log(currentweightsarray);
+    currentgrade=0;
+    for(var i=0;i< currentgradesarray.length ;i++ ){
+        var x= currentgradesarray[i];
+        var y= currentweightsarray[i];
+        currentgrade += (x*y);
     }
     currentgrade= (currentgrade/100);
-    console.log(currentgrade);
 }
 
 
@@ -47,35 +75,88 @@ function gethomework(){
     for(var i=0; i<hwarray.length; i++){
         hwarray[i] = parseInt(hwarray[i])
     }
+    checkvalues(hwarray);
     for(var i=0; i<hwarray.length;i++){
         averagehomework+=hwarray[i];
     }
     averagehomework= (averagehomework/(hwarray.length));
+    colorbox(averagehomework,homeworkrow,homeworkgrades,homeworksweight);
+    document.getElementById("homeworkgrades").value = averagehomework;
+
 }
 
 function getquizzes(){
-    averagetest =0;
+    averagequiz =0;
     var quizstr= document.getElementById("quizzesgrades").value;
     var quizarray= quizstr.split(",");
     for(var i=0; i<quizarray.length; i++){
         quizarray[i] = parseInt(quizarray[i])
     }
+    checkvalues(quizarray);
     for(var i=0; i<quizarray.length;i++){
         averagequiz+=quizarray[i];
     }
     averagequiz= (averagequiz/(quizarray.length));
+    colorbox(averagequiz,quizzesrow,quizzesgrades,quizzesweight);
+    document.getElementById("quizzesgrades").value = averagequiz;
+
+
 }
 
 function gettests(){
-    averagequiz =0;
+    averagetest =0;
     var teststr= document.getElementById("testgrades").value;
     var testarray= teststr.split(",");
     for(var i=0; i<testarray.length; i++){
         testarray[i] = parseInt(testarray[i])
     }
+    checkvalues(testarray);
     for(var i=0; i<testarray.length;i++){
         averagetest+=testarray[i];
     }
     averagetest= (averagetest/(testarray.length));
+    document.getElementById("testgrades").value = averagetest;
+    colorbox(averagetest,testsrow,testgrades,testsweight);
 }
 
+function colorbox(x,y,z,b){
+    if(x>=90){
+        y.style.backgroundColor= "lime";
+        z.style.backgroundColor= "lime";
+        b.style.backgroundColor= "lime";
+    }else if( x<90 && x>=80 ){
+        y.style.backgroundColor="yellow";
+        z.style.backgroundColor="yellow";
+        b.style.backgroundColor="yellow";
+    }else if (x<80 && x>=70){
+        y.style.backgroundColor= "orange";
+        z.style.backgroundColor= "orange";
+        b.style.backgroundColor= "orange";
+    }else if (x<70 && x>=60){
+        y.style.backgroundColor="red";
+        z.style.backgroundColor="red";
+        b.style.backgroundColor="red";
+    }else if(x<60){
+        y.style.backgroundColor="fuchsia";
+        z.style.backgroundColor="fuchsia";
+        b.style.backgroundColor="fuchsia";
+    }
+}
+
+function checkvalues(x){
+    for(var i=0; i<x.length; i++){
+        if (x[i]>100 || x[i]<0){
+            alert("invalid input!")
+        }
+    }
+}
+
+function message(z){
+    if (z>100){
+        document.getElementById("neededgrade").innerHTML+= "<br/>"+"It's Looking Rough Mate...";
+    }else if (z<75){
+        document.getElementById("neededgrade").innerHTML+= "<br/>"+"Easy Dub!";
+    }else if (z>=75 && z<=100){
+        document.getElementById("neededgrade").innerHTML+= "<br/>"+"That's feasible, right?";
+    }
+}

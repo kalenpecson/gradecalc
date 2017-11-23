@@ -1,0 +1,99 @@
+#table{
+    margin-top: 25px;
+    text-align: center ;
+}
+#truetable{
+    margin:auto;
+    width: 30%;
+    background-color: lightgrey;
+    border-collapse: collapse;
+}
+th, td{
+    border-bottom: 1px solid darkgrey;
+    padding: 10px;
+    text-align: center ;
+}
+tr:nth-child(even) {background-color: ghostwhite ;}
+
+#desiredstuff{
+    margin-top: 30px;
+    text-align: center ;
+}
+
+
+#button{
+    position: relative;
+    margin-top: 20px;
+    text-align:center;
+}
+
+#text {
+    text-align: center;
+    text-shadow: 3px 2px white;
+    font-size: 40px;
+
+}
+#Calculatescore {
+    border-radius: 25px;
+    background-color: white;
+    border: 2px solid grey;
+    color: black;
+    padding: 8px 20px;
+    font-size: 20px;
+}
+
+#Calculatescore:hover{
+    background-color: grey;
+    color: white;
+}
+
+#neededgrade{
+    text-align: center ;
+    font-size: 35px;
+
+}
+
+body{
+    background-color: darkgrey;
+}
+#homeworkgrades {
+    background-color: ghostwhite;
+    border: 0;
+}
+#homeworksweight {
+    background-color: ghostwhite;
+    border: 0;
+}
+#testgrades {
+    background-color: ghostwhite;
+    border: 0;
+}
+#testsweight {
+    background-color: ghostwhite;
+    border: 0;
+}
+#quizzesweight {
+    background-color: lightgrey;
+    border: 0;
+}
+#quizzesgrades {
+    background-color: lightgrey;
+    border: 0;
+}
+#midtermsweight {
+    background-color: lightgrey;
+    border: 0;
+}
+#midtermgrades {
+    background-color: lightgrey;
+    border: 0;
+}
+#desiredgrade  {
+    background-color: lightgrey;
+    border: 0;
+}
+
+#finalweight {
+    background-color: lightgrey;
+    border: 0;
+}
