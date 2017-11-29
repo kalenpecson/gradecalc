@@ -13,10 +13,16 @@ var finalweight=0;
 var necessarygrade=0;
 
 function calculateGradeNeeded(){
-    if (!checkweights()){
+    testweight= document.getElementById("testsweight").value;
+    quizweight= document.getElementById("quizzesweight").value;
+    midtermweight= document.getElementById("midtermsweight").value;
+    homeworkweight= document.getElementById("homeworksweight").value;
+
+    if (checkweights()==false){
         return;
     }
     calculateCurrentGrade();
+
     wantedgrade= document.getElementById("desiredgrade").value;
     var wantedgradearray=[];
     wantedgradearray.push(wantedgrade);
@@ -63,6 +69,7 @@ function checkweights(){
 }
 
 function calculateCurrentGrade(){
+
     gethomework();
     getquizzes();
     gettests();
@@ -76,10 +83,7 @@ function calculateCurrentGrade(){
     colorbox(midterm,midtermrow,midtermgrades,midtermsweight);
     checkvalues(midtermarray);
     var currentgradesarray=[averagehomework, averagequiz, averagetest, midterm];
-    testweight= document.getElementById("testsweight").value;
-    quizweight= document.getElementById("quizzesweight").value;
-    midtermweight= document.getElementById("midtermsweight").value;
-    homeworkweight= document.getElementById("homeworksweight").value;
+
     var currentweightsarray=[homeworkweight, quizweight, testweight, midtermweight];
     for(var i=0;i<currentweightsarray.length; i++){
         currentweightsarray[i] = parseInt(currentweightsarray[i])
@@ -172,8 +176,8 @@ function colorbox(x,y,z,b){
 
 function checkvalues(x){
     for(var i=0; i<x.length; i++){
-        if (x[i]<0){
-            alert("invalid input!")
+        if (x[i]<0 || x[i]>100){
+            alert("Are you sure those are your grades??")
         }
     }
 }
