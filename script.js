@@ -1,7 +1,3 @@
-
-var averagehomework=0;
-var averagequiz=0;
-var averagetest=0;
 var midterm=0;
 var homeworkweight=0;
 var testweight=0;
@@ -69,10 +65,15 @@ function checkweights(){
 }
 
 function calculateCurrentGrade(){
-
-    gethomework();
-    getquizzes();
-    gettests();
+    var averagehomework=averagestring(document.getElementById("homeworkgrades").value);
+    var averagequiz=averagestring(document.getElementById("quizzesgrades").value);
+    var averagetest=averagestring(document.getElementById("testgrades").value);
+    document.getElementById("homeworkgrades").value= averagehomework;
+    document.getElementById("quizzesgrades").value=averagequiz;
+    document.getElementById("testgrades").value= averagetest;
+    colorbox(averagehomework,homeworkrow,homeworkgrades,homeworksweight);
+    colorbox(averagequiz,quizzesrow,quizzesgrades,quizzesweight);
+    colorbox(averagetest,testsrow,testgrades,testsweight);
     midterm= document.getElementById("midtermgrades").value;
     var midtermarray=[];
     midtermarray.push(midterm);
@@ -98,56 +99,18 @@ function calculateCurrentGrade(){
     currentgrade= (currentgrade/100);
 }
 
-
-function gethomework(){
-    averagehomework =0;
-    var hwstr= document.getElementById("homeworkgrades").value;
-    var hwarray= hwstr.split(",");
-    for(var i=0; i<hwarray.length; i++){
-        hwarray[i] = parseInt(hwarray[i])
+function averagestring(string){
+    var average=0;
+    var array= string.split(",");
+    for(var i=0; i<array.length; i++){
+        array[i] = parseInt(array[i])
     }
-    checkvalues(hwarray);
-    for(var i=0; i<hwarray.length;i++){
-        averagehomework+=hwarray[i];
+    checkvalues(array);
+    for(var i=0; i<array.length;i++){
+        average+=array[i];
     }
-    averagehomework= (averagehomework/(hwarray.length));
-    colorbox(averagehomework,homeworkrow,homeworkgrades,homeworksweight);
-    document.getElementById("homeworkgrades").value = averagehomework;
-
-}
-
-function getquizzes(){
-    averagequiz =0;
-    var quizstr= document.getElementById("quizzesgrades").value;
-    var quizarray= quizstr.split(",");
-    for(var i=0; i<quizarray.length; i++){
-        quizarray[i] = parseInt(quizarray[i])
-    }
-    checkvalues(quizarray);
-    for(var i=0; i<quizarray.length;i++){
-        averagequiz+=quizarray[i];
-    }
-    averagequiz= (averagequiz/(quizarray.length));
-    colorbox(averagequiz,quizzesrow,quizzesgrades,quizzesweight);
-    document.getElementById("quizzesgrades").value = averagequiz;
-
-
-}
-
-function gettests(){
-    averagetest =0;
-    var teststr= document.getElementById("testgrades").value;
-    var testarray= teststr.split(",");
-    for(var i=0; i<testarray.length; i++){
-        testarray[i] = parseInt(testarray[i])
-    }
-    checkvalues(testarray);
-    for(var i=0; i<testarray.length;i++){
-        averagetest+=testarray[i];
-    }
-    averagetest= (averagetest/(testarray.length));
-    document.getElementById("testgrades").value = averagetest;
-    colorbox(averagetest,testsrow,testgrades,testsweight);
+    average= (average/(array.length));
+    return average;
 }
 
 function colorbox(x,y,z,b){
